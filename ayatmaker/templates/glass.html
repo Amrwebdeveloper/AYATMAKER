@@ -1,0 +1,26 @@
+<!doctype html><html><head><meta charset="utf-8"><style>
+{{BASE_CSS}}
+{{FONT_FACES}}
+
+.card { padding: 70px 56px 56px; border-radius: 56px; background: rgba(10,16,14,.52);
+        border: 1.5px solid rgba(255,255,255,.22); box-shadow: 0 10px 40px rgba(0,0,0,.35), inset 0 1px 0 rgba(255,255,255,.18); }
+.title .card { padding: 8px 44px; }
+.ar, .t-ar { text-shadow: 0 1px 6px rgba(0,0,0,.35); }
+</style></head><body data-compact>
+<div class="view body" id="body"><div class="card" id="card">
+  <div class="ar" id="ar"></div>
+  <div class="divider"><span class="ln"></span>{{ORN_DIAMOND}}<span class="ln r"></span></div>
+  <div class="en" id="en"></div>
+  <div class="marker" id="marker"><span class="ln"></span><div class="num">{{ORN_MEDALLION}}<span id="num"></span></div><span class="ln r"></span></div>
+</div></div>
+<div class="view title hidden" id="title"><div class="card">
+  <div class="t-orn"><span class="ln"></span>{{ORN_DIAMOND}}<span class="ln r"></span></div>
+  <div class="t-ar" id="t-ar"></div>
+  <div class="t-orn"><span class="ln"></span>{{ORN_DIAMOND}}<span class="ln r"></span></div>
+  <div class="t-spacer"></div>
+  <div class="t-en" id="t-en"></div>
+  <div class="t-ref" id="t-ref"></div>
+  <div class="t-reader" id="t-reader"></div>
+</div></div>
+{{JS}}
+</body></html>

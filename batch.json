@@ -1,0 +1,10 @@
+{
+  "template": "auto",
+  "jobs": [
+    {"surah": 2, "ayah": "255", "readers": ["alafasy", "mahermuaiqly", "sudais"]},
+    {"surah": 112, "ayah": "all", "readers": ["alafasy", "mahermuaiqly", "sudais"]},
+    {"surah": 113, "ayah": "all", "readers": ["alafasy", "mahermuaiqly", "sudais"]},
+    {"surah": 114, "ayah": "all", "readers": ["alafasy", "mahermuaiqly", "sudais"]},
+    {"surah": 1, "ayah": "all", "readers": ["alafasy", "mahermuaiqly", "sudais"]}
+  ]
+}

@@ -1,0 +1,57 @@
+/* Shared styles for all HTML templates. {{FONT_FACES}} is injected by htmlrender.py */
+:root {
+  --gold: #d9b76a;
+  --gold-soft: #b8975a;
+  --ar-size: 80px;
+  --ar-family: 'QVArabic';
+  --ar-weight: 700;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { width: 1080px; height: 1920px; background: transparent; overflow: hidden; }
+body { position: relative; font-family: 'QVSans', sans-serif; color: #fff; }
+.view { position: absolute; left: 90px; right: 90px; top: 520px; height: 1050px;
+        display: flex; align-items: center; justify-content: center; }
+.view.title { top: 420px; height: 800px; }
+.hidden { display: none !important; }
+.card { width: 100%; display: flex; flex-direction: column; align-items: center; text-align: center; }
+.ar { font-family: var(--ar-family), serif; font-weight: var(--ar-weight); font-size: var(--ar-size);
+      line-height: 2; direction: rtl; color: #fff; width: 100%;
+      text-shadow: 0 2px 14px rgba(0,0,0,.65), 0 0 3px rgba(0,0,0,.5);
+      font-feature-settings: "liga" 1, "calt" 1; word-spacing: .05em; }
+.divider { display: flex; align-items: center; justify-content: center; gap: 16px; margin: 6px 0 22px; width: 60%; }
+.divider .ln { flex: 1; height: 1.5px; background: linear-gradient(90deg, transparent, var(--gold)); }
+.divider .ln.r { background: linear-gradient(270deg, transparent, var(--gold)); }
+.divider svg { width: 26px; height: 26px; flex: none; filter: drop-shadow(0 1px 4px rgba(0,0,0,.6)); }
+.en { font-weight: 500; font-size: calc(var(--ar-size) * .42); line-height: 1.5; color: rgba(255,255,255,.72);
+      text-shadow: 0 2px 10px rgba(0,0,0,.75); max-width: 100%; letter-spacing: .01em; }
+.marker { margin-top: 30px; display: flex; align-items: center; gap: 18px; }
+.marker .ln { width: 90px; height: 1.5px; background: linear-gradient(90deg, transparent, var(--gold)); }
+.marker .ln.r { background: linear-gradient(270deg, transparent, var(--gold)); }
+.marker .num { position: relative; width: 84px; height: 84px; display: flex; align-items: center; justify-content: center; }
+.marker .num svg { position: absolute; inset: 0; width: 100%; height: 100%; filter: drop-shadow(0 2px 6px rgba(0,0,0,.6)); }
+.marker .num span { position: relative; font-family: var(--ar-family), serif; font-weight: 700; font-size: 38px;
+      color: var(--gold); line-height: 1; padding-top: 4px; text-shadow: 0 1px 6px rgba(0,0,0,.7); }
+.marker.none { display: none; }
+
+/* title card */
+.t-orn { display: flex; align-items: center; gap: 18px; width: 70%; justify-content: center; }
+.t-orn .ln { flex: 1; height: 1.5px; background: linear-gradient(90deg, transparent, var(--gold)); }
+.t-orn .ln.r { background: linear-gradient(270deg, transparent, var(--gold)); }
+.t-orn svg { width: 30px; height: 30px; flex: none; }
+.t-ar { font-family: var(--ar-family), serif; font-weight: var(--ar-weight); font-size: 132px; line-height: 1.7;
+        color: #fff; direction: rtl; margin: 10px 0 0; text-shadow: 0 2px 16px rgba(0,0,0,.7), 0 0 3px rgba(0,0,0,.5); }
+.t-en { font-weight: 600; font-size: 46px; letter-spacing: .04em; color: #fff; margin-top: 4px;
+        text-shadow: 0 2px 10px rgba(0,0,0,.75); }
+.t-ref { font-weight: 500; font-size: 32px; letter-spacing: .12em; text-transform: uppercase; color: var(--gold); margin-top: 14px;
+         text-shadow: 0 2px 8px rgba(0,0,0,.75); }
+.t-reader { font-weight: 500; font-size: 28px; color: rgba(255,255,255,.65); margin-top: 30px; letter-spacing: .06em;
+            text-shadow: 0 2px 8px rgba(0,0,0,.75); }
+.t-spacer { height: 28px; }
+
+/* compact title (all templates): one Arabic name + one small line, strictly above the verse area (y>=520) */
+body[data-compact] .view.title { top: 240px; height: auto; max-height: 220px; align-items: flex-start; }
+body[data-compact] .t-orn, body[data-compact] .t-spacer, body[data-compact] .t-ref, body[data-compact] .t-reader { display: none; }
+body[data-compact] .t-ar { font-size: 88px; line-height: 1.4; margin: 0; }
+body[data-compact] .t-en { font-size: 32px; font-weight: 500; letter-spacing: .05em; color: var(--gold); margin-top: 4px; white-space: nowrap; }
+.en .nb, .t-en .nb { white-space: nowrap; }
+.en { hyphens: none; -webkit-hyphens: none; }

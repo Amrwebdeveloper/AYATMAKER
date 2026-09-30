@@ -1,0 +1,16 @@
+.venv/
+cache/
+output/
+config.toml
+.env
+__pycache__/
+*.pyc
+.render_*.html
+
+# user footage stays local
+my_clips/*
+!my_clips/README.txt
+
+# KFGQPC font: not redistributable here; user supplies it (see ayatmaker/templates/fonts/FONTS.md)
+ayatmaker/templates/fonts/UthmanicHafs1*.woff2
+ayatmaker/templates/fonts/UthmanicHafs*

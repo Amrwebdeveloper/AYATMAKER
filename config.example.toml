@@ -1,0 +1,3 @@
+# Copy to config.toml (gitignored). The env var PEXELS_API_KEY takes precedence.
+# Free key: https://www.pexels.com/api/
+pexels_api_key = ""

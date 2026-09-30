@@ -1,0 +1,30 @@
+<!doctype html><html><head><meta charset="utf-8"><style>
+{{BASE_CSS}}
+{{FONT_FACES}}
+
+.card { position: relative; padding: 84px 64px 74px; }
+.card::before { content: ""; position: absolute; inset: 0; border: 2.5px solid var(--gold); border-radius: 6px; box-shadow: 0 0 14px rgba(0,0,0,.45); }
+.card::after { content: ""; position: absolute; inset: 14px; border: 1px solid rgba(217,183,106,.75); border-radius: 3px; }
+.corner { position: absolute; width: 96px; height: 96px; z-index: 2; filter: drop-shadow(0 1px 4px rgba(0,0,0,.6)); }
+.corner.tl { top: -4px; left: -4px; } .corner.tr { top: -4px; right: -4px; transform: scaleX(-1); }
+.corner.bl { bottom: -4px; left: -4px; transform: scaleY(-1); } .corner.br { bottom: -4px; right: -4px; transform: scale(-1,-1); }
+.title .card { padding: 22px 56px; }
+.title .corner { width: 56px; height: 56px; }
+</style></head><body data-compact>
+<div class="view body" id="body"><div class="card" id="card"><div class="corner tl">{{ORN_CORNER}}</div><div class="corner tr">{{ORN_CORNER}}</div><div class="corner bl">{{ORN_CORNER}}</div><div class="corner br">{{ORN_CORNER}}</div>
+  <div class="ar" id="ar"></div>
+  <div class="divider"><span class="ln"></span>{{ORN_DIAMOND}}<span class="ln r"></span></div>
+  <div class="en" id="en"></div>
+  <div class="marker" id="marker"><span class="ln"></span><div class="num">{{ORN_MEDALLION}}<span id="num"></span></div><span class="ln r"></span></div>
+</div></div>
+<div class="view title hidden" id="title"><div class="card"><div class="corner tl">{{ORN_CORNER}}</div><div class="corner tr">{{ORN_CORNER}}</div><div class="corner bl">{{ORN_CORNER}}</div><div class="corner br">{{ORN_CORNER}}</div>
+  <div class="t-orn"><span class="ln"></span>{{ORN_DIAMOND}}<span class="ln r"></span></div>
+  <div class="t-ar" id="t-ar"></div>
+  <div class="t-orn"><span class="ln"></span>{{ORN_DIAMOND}}<span class="ln r"></span></div>
+  <div class="t-spacer"></div>
+  <div class="t-en" id="t-en"></div>
+  <div class="t-ref" id="t-ref"></div>
+  <div class="t-reader" id="t-reader"></div>
+</div></div>
+{{JS}}
+</body></html>

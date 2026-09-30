@@ -1,0 +1,8 @@
+# Clips listed here are never used. One entry per line; '#' starts a comment.
+# Accepted entries:
+#   3571264                              a Pexels video id
+#   https://www.pexels.com/video/...-3571264/   a Pexels URL (the id is extracted)
+#   vid-<hash>.mp4                       a downloaded cache file name (from cache/footage or *.clips.json)
+#   beach.mp4  or  trips/beach.mp4       a file (or relative path) under my_clips/ (case-insensitive)
+#   my_clips/old/*   or   *.mov          glob patterns for my_clips/
+# Manage it with: python -m ayatmaker.exclude add|list|remove <entry>
