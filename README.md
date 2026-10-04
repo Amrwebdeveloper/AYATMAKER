@@ -160,4 +160,4 @@ Pexels id, original URL or local path, cached file name and start time in the vi
 its `pexels_id` (or the file name from `origin` for your own clips) from that JSON, run `exclude add <it>`, and rebuild
 the video (delete the old output first, since batch skips existing files).
 
-License: not yet specified
+License: [MIT](LICENSE). Bundled fonts keep their own licenses (see `ayatmaker/templates/fonts/LICENSES.md`); recitation audio is not covered by this license.
