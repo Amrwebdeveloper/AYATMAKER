@@ -15,6 +15,7 @@ API = "https://api.alquran.cloud/v1/ayah/{surah}:{ayah}/{edition}"
 AUDIO = "https://cdn.islamic.network/quran/audio/{bitrate}/{edition}/{number}.mp3"
 
 AUDIO_BITRATES = (128, 192, 64)
+SURAH_COUNT = 114
 
 # reader key -> (audio edition, display name)
 READERS: dict[str, tuple[str, str]] = {
@@ -56,8 +57,8 @@ def _get_json(surah: int, ayah: int, edition: str, cache: Path) -> dict:
             r = requests.get(API.format(surah=surah, ayah=ayah, edition=edition), timeout=30)
         except requests.RequestException:
             r = None
-        if r is not None and r.status_code == 200:
-            break
+        if r is not None and (r.status_code == 200 or 400 <= r.status_code < 500):
+            break  # success, or a client error that retrying will not fix
         time.sleep(1.5 * (attempt + 1))
     if r is None:
         raise QuranApiError(f"alquran.cloud {edition} {surah}:{ayah} unreachable")
@@ -149,15 +150,21 @@ def fetch_ayah(surah: int, ayah: int, reader: str, cache: Path) -> Ayah:
 
 def ayah_count(surah: int, cache: Path) -> int:
     cache.mkdir(parents=True, exist_ok=True)
+    if not 1 <= surah <= SURAH_COUNT:
+        raise QuranApiError(f"invalid surah {surah}; must be 1-{SURAH_COUNT}")
     path = cache / f"surah_{surah}_meta.json"
     if not path.exists():
         for attempt in range(4):
             try:
                 r = requests.get(f"https://api.alquran.cloud/v1/surah/{surah}", timeout=15)
-                break
             except requests.RequestException:
                 if attempt == 3:
                     raise
+                time.sleep(1.5 * (attempt + 1))
+                continue
+            if r.status_code == 200 or 400 <= r.status_code < 500 or attempt == 3:
+                break
+            time.sleep(1.5 * (attempt + 1))
         if r.status_code != 200:
             raise QuranApiError(f"surah {surah} meta -> HTTP {r.status_code}")
         path.write_text(json.dumps(r.json(), ensure_ascii=False), encoding="utf-8")

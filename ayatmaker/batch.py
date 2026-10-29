@@ -50,7 +50,7 @@ def main(argv: list[str] | None = None) -> int:
                 template = job.get("template") or args.template or cfg.get("template") or DEFAULT_TEMPLATE
                 if template == "auto":
                     template = ROTATION[idx % len(ROTATION)]
-                font = args.font or job.get("font") or cfg.get("font") or DEFAULT_FONT
+                font = job.get("font") or args.font or cfg.get("font") or DEFAULT_FONT
                 clips = job.get("clips") or args.clips or cfg.get("clips") or None
                 if clips is not None and clips not in CLIP_MODES:
                     raise ValueError(f"unknown clips mode {clips!r}")

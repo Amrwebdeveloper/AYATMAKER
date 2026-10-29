@@ -42,7 +42,7 @@ and `glass` (As-Sudais).
 ## Results
 
 Measured on the six videos in `output/` (probed with the bundled imageio-ffmpeg FFmpeg build).
-All six: 1080x1920, 30 fps, H.264 High (yuv420p) video, AAC-LC 96 kHz stereo audio.
+All six: 1080x1920, 30 fps, H.264 High (yuv420p) video, AAC-LC 96 kHz stereo audio (these were built before the fix that resamples to 48 kHz after loudnorm; new builds are 48 kHz).
 
 | Video | Duration (s) | Audio (s) | Size (MB) |
 |---|---|---|---|
@@ -79,7 +79,7 @@ Pipeline facts (measured or read from the code and templates):
 ## Requirements
 
 - Windows with PowerShell (the setup script is PowerShell; the code itself is plain Python)
-- Python 3 (tested with 3.13)
+- Python 3.11 or newer (needs `tomllib`; tested with 3.13)
 - A free Pexels API key (only when using Pexels footage)
 - Dependencies are installed by `setup.ps1`: see `requirements.txt` (includes Playwright and its Chromium, and a bundled FFmpeg)
 
@@ -107,7 +107,8 @@ Batch (resumable) and dry-run:
 .\.venv\Scripts\python -m ayatmaker.batch --config batch.json --out output [--template auto]
 ```
 
-`batch.json` accepts `"ayah": "all"` and optional per-job `template`, `font` and `clips`.
+`batch.json` accepts `"ayah": "all"` and optional per-job `template`, `font` and `clips`. For each of these the
+per-job value wins, then the command-line flag, then the top-level value in `batch.json`, then the default.
 
 ## Fonts and licenses
 

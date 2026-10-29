@@ -10,7 +10,7 @@ from pathlib import Path
 
 from . import render
 from .templates.htmlrender import check_font
-from .api import CACHE_DIR, FFMPEG, READERS, Ayah, fetch_ayah, media_duration
+from .api import CACHE_DIR, FFMPEG, READERS, SURAH_COUNT, Ayah, ayah_count, fetch_ayah, media_duration
 from .footage import CLIP_MODES, pick_clips
 
 FPS = 30
@@ -114,7 +114,7 @@ def build_video(ayahs: list[Ayah], reader: str, out_file: Path, cache: Path, tem
     ains = "".join(f"[{n + i}:a]aresample=44100,aformat=channel_layouts=stereo{gap(i)}[a{i}];" for i in range(len(ayahs)))
     ajoin = "".join(f"[a{i}]" for i in range(len(ayahs)))
     f.append(
-        ains + f"{ajoin}concat=n={len(ayahs)}:v=0:a=1,loudnorm=I=-16:TP=-1.5:LRA=11,"
+        ains + f"{ajoin}concat=n={len(ayahs)}:v=0:a=1,loudnorm=I=-16:TP=-1.5:LRA=11,aresample=48000,"
         f"adelay={int(PAD_START * 1000)}:all=1,apad=whole_dur={total:.3f},"
         f"afade=t=out:st={total - FADE_OUT:.3f}:d={FADE_OUT}[a]"
     )
@@ -148,7 +148,12 @@ def build_video(ayahs: list[Ayah], reader: str, out_file: Path, cache: Path, tem
 def run_job(surah: int, first: int, last: int, ref: str, reader: str, out: Path, template: str = DEFAULT_TEMPLATE,
             font: str = DEFAULT_FONT, clips_mode: str | None = None) -> Path:
     check_font(font)  # fail before any network work
+    if not 1 <= surah <= SURAH_COUNT:
+        raise ValueError(f"invalid surah {surah}; must be 1-{SURAH_COUNT}")
     cache = CACHE_DIR
+    count = ayah_count(surah, cache)
+    if last > count:
+        raise ValueError(f"surah {surah} has {count} ayahs; requested {first}-{last}")
     ayahs = [fetch_ayah(surah, n, reader, cache) for n in range(first, last + 1)]
     out_file = out / f"quran_{surah}_{ref}_{reader}_{template}.mp4"
     used = build_video(ayahs, reader, out_file, cache, template, font, clips_mode)
